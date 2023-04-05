@@ -10,7 +10,7 @@ jobs:
 - job: Test
   displayName: Run tests
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
   steps:
   - task: Maven@3
     inputs:
@@ -21,8 +21,14 @@ jobs:
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: '**/TEST-*.xml'
-      testRunTitle: 'Test Results'
+      
+      
+ resources:
+  pipelines:
+  - pipeline: MyPipeline
+    source: MyPipeline
+    trigger:
+      branches:
+        include:
+        - master
+    parallel: 1
