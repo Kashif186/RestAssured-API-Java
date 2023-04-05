@@ -22,13 +22,3 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       
-      
- resources:
-  pipelines:
-  - pipeline: MyPipeline
-    source: MyPipeline
-    trigger:
-      branches:
-        include:
-        - master
-    parallel: 1
